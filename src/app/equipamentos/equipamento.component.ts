@@ -24,6 +24,7 @@ export class EquipamentoComponent implements OnInit {
 
     this.form = this.fb.group({
       id: new FormControl(""),
+      numserie: new FormControl(""),
       nome: new FormControl(""),
       preco: new FormControl(""),
       datafabricacao: new FormControl("")
@@ -36,6 +37,10 @@ export class EquipamentoComponent implements OnInit {
 
   get id() {
     return this.form.get("id");
+  }
+
+  get numserie() {
+    return this.form.get("numserie");
   }
 
   get nome() {
