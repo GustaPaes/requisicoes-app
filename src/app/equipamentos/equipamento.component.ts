@@ -69,22 +69,28 @@ export class EquipamentoComponent implements OnInit {
       if (!equipamento)
       {
         await this.equipamentoService.inserir(this.form.value)
-        this.toastrService.success("O equipamento foi inserido com sucesso", "Inserção de Equipamentos");
+        this.toastrService.success("O equipamento foi inserido com sucesso!", "Inserção de Equipamentos");
       }
       else
       {
         await this.equipamentoService.editar(this.form.value);
-        this.toastrService.success("O equipamento foi editado com sucesso", "Edição de Equipamentos");
+        this.toastrService.success("O equipamento foi editado com sucesso!", "Edição de Equipamentos");
       }
 
     } catch (error) {
-      this.toastrService.error("Houve um erro ao tentar salvar o Equipamento! Tente novamente.", "Cadastro de Equipamentos")
+      if (error != "fechar" && error != "0" && error != "1")
+        this.toastrService.error("Houve um erro ao tentar salvar o Equipamento! Tente novamente.", "Cadastro de Equipamentos");
     }
 
   }
 
   public excluir(equipamento: Equipamento) {
-    this.equipamentoService.excluir(equipamento);
+    try {
+      this.equipamentoService.excluir(equipamento);
+      this.toastrService.success("O equipamento foi excluido com sucesso!", "Exclusão de Equipamentos");
+    } catch (error) {
+      this.toastrService.error("Houve um erro ao tentar excluir o Equipamento! Tente novamente.", "Exclusão de Equipamentos");
+    }
   }
 
 }

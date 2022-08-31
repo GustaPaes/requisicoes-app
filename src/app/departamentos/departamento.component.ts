@@ -75,7 +75,12 @@ export class DepartamentoComponent implements OnInit {
   }
 
   public excluir(departamento: Departamento) {
-    this.departamentoService.excluir(departamento);
+    try {
+      this.departamentoService.excluir(departamento);
+      this.toastrService.success("O departamento foi excluido com sucesso!", "Exclusão de Departamentos");
+    } catch (error) {
+      this.toastrService.error("Houve um erro ao tentar excluir o Departamento! Tente novamente.", "Exclusão de Departamentos");
+    }
   }
 
 }
