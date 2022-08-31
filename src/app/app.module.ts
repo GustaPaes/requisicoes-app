@@ -20,6 +20,12 @@ import { DepartamentoModule } from './departamentos/departamento.module';
 import { EquipamentoModule } from './equipamentos/equipamento.module';
 import { ToastrModule } from 'ngx-toastr';
 
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
+
+registerLocaleData(ptBr)
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +49,11 @@ import { ToastrModule } from 'ngx-toastr';
     DepartamentoModule,
     EquipamentoModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    { provide: LOCALE_ID, useValue: "pt" },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: "BRL" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
