@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Equipamento } from './models/equipamento.model';
 import { EquipamentoService } from './services/equipamento.service';
@@ -16,7 +17,8 @@ export class EquipamentoComponent implements OnInit {
   constructor(
     private equipamentoService: EquipamentoService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -65,12 +67,18 @@ export class EquipamentoComponent implements OnInit {
       await this.modalService.open(modal).result;
 
       if (!equipamento)
+      {
         await this.equipamentoService.inserir(this.form.value)
+        this.toastrService.success("O equipamento foi inserido com sucesso", "Inserção de Equipamentos");
+      }
       else
+      {
         await this.equipamentoService.editar(this.form.value);
+        this.toastrService.success("O equipamento foi editado com sucesso", "Edição de Equipamentos");
+      }
 
-      console.log(`O equipamento foi salvo com sucesso`);
-    } catch (_error) {
+    } catch (error) {
+      this.toastrService.error("Houve um erro ao tentar salvar o Equipamento! Tente novamente.", "Cadastro de Equipamentos")
     }
 
   }

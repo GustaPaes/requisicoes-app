@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DepartamentoModule } from './departamentos/departamento.module';
 import { EquipamentoModule } from './equipamentos/equipamento.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EquipamentoModule } from './equipamentos/equipamento.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ToastrModule.forRoot(),
 
     DepartamentoModule,
     EquipamentoModule
