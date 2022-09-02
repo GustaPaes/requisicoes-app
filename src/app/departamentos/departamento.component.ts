@@ -56,15 +56,17 @@ export class DepartamentoComponent implements OnInit {
     try {
       await this.modalService.open(modal).result;
 
-      if (!departamento)
-      {
-        await this.departamentoService.inserir(this.form.value)
-        this.toastrService.success("O departamento foi inserido com sucesso", "Inserção de Departamentos");
-      }
-      else
-      {
-        await this.departamentoService.editar(this.form.value);
-        this.toastrService.success("O departamento foi editado com sucesso", "Edição de Departamentos");
+      if (this.form.dirty && this.form.valid) {
+        if (!departamento)
+        {
+          await this.departamentoService.inserir(this.form.value)
+          this.toastrService.success("O departamento foi inserido com sucesso", "Inserção de Departamentos");
+        }
+        else
+        {
+          await this.departamentoService.editar(this.form.value);
+          this.toastrService.success("O departamento foi editado com sucesso", "Edição de Departamentos");
+        }
       }
 
     } catch (error) {

@@ -50,15 +50,17 @@ export class EquipamentoComponent implements OnInit {
     try {
       await this.modalService.open(modal).result;
 
-      if (!equipamento)
-      {
-        await this.equipamentoService.inserir(this.form.value)
-        this.toastrService.success("O equipamento foi inserido com sucesso", "Inserção de Equipamentos");
-      }
-      else
-      {
-        await this.equipamentoService.editar(this.form.value);
-        this.toastrService.success("O equipamento foi editado com sucesso", "Edição de Equipamentos");
+      if (this.form.dirty && this.form.valid) {
+        if (!equipamento)
+        {
+          await this.equipamentoService.inserir(this.form.value)
+          this.toastrService.success("O equipamento foi inserido com sucesso", "Inserção de Equipamentos");
+        }
+        else
+        {
+          await this.equipamentoService.editar(this.form.value);
+          this.toastrService.success("O equipamento foi editado com sucesso", "Edição de Equipamentos");
+        }
       }
 
     } catch (error) {
