@@ -67,9 +67,9 @@ export class DepartamentoComponent implements OnInit {
         this.toastrService.success("O departamento foi editado com sucesso", "Edição de Departamentos");
       }
 
-      console.log(`O departamento foi salvo com sucesso`);
     } catch (error) {
-      this.toastrService.error("Houve um erro ao tentar salvar o Equipamento! Tente novamente.", "Cadastro de Departamentos")
+      if (error != "fechar" && error != "0" && error != "1")
+        this.toastrService.error("Houve um erro ao tentar salvar o Equipamento! Tente novamente.", "Cadastro de Departamentos")
     }
 
   }

@@ -16,15 +16,13 @@ import { PainelComponent } from './painel/painel.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DepartamentoModule } from './departamentos/departamento.module';
-import { EquipamentoModule } from './equipamentos/equipamento.module';
-import { ToastrModule } from 'ngx-toastr';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 
-registerLocaleData(ptBr)
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -44,10 +42,7 @@ registerLocaleData(ptBr)
     AngularFirestoreModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
-    }),
-
-    DepartamentoModule,
-    EquipamentoModule
+    })
   ],
   providers: [
     AuthenticationService,

@@ -18,4 +18,5 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DepartamentoRoutingModule
   ]
 })
+
 export class DepartamentoModule { }
