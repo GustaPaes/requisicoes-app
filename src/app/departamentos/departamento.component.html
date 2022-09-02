@@ -63,20 +63,30 @@
   </div>
   <form [formGroup]="form" (ngSubmit)="modal.close('gravar')">
     <div class="modal-body">
-      <div class="form-group mb-3">
+      <div class="form-group mb-3 position-relative">
         <label for="nome" class="form-label">Nome do Departamento</label>
         <input formControlName="nome"
+          [ngClass]="(nome?.touched && nome?.invalid) ? 'is-invalid' : ''"
           class="form-control"
           type="text"
           placeholder="Digite o nome do departamento">
+          <div class="invalid-tooltip" *ngIf="nome?.touched && nome?.invalid">
+            <span *ngIf="nome?.errors?.['required']">O nome precisa ser preenchido.</span>
+            <span *ngIf="nome?.errors?.['minlength']">O nome precisa ter no minimo 3 letras.</span>
+          </div>
       </div>
 
-      <div class="form-group mb-3">
+      <div class="form-group mb-3 position-relative">
         <label for="telefone" class="form-label">Telefone</label>
         <input formControlName="telefone"
+          [ngClass]="(telefone?.touched && telefone?.invalid) ? 'is-invalid' : ''"
           class="form-control"
           type="text"
           placeholder="Digite o número de telefone do departamento">
+          <div class="invalid-tooltip" *ngIf="telefone?.touched && telefone?.invalid">
+            <span *ngIf="telefone?.errors?.['required']">O telefone precisa ser preenchido.</span>
+            <span *ngIf="telefone?.errors?.['minlength']">O telefone precisa ter no minimo 8 numeros.</span>
+          </div>
       </div>
 
     </div>
