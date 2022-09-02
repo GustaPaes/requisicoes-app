@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -24,10 +24,10 @@ export class EquipamentoComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       id: new FormControl(""),
-      numeroSerie: new FormControl(""),
-      nome: new FormControl(""),
-      precoAquisicao: new FormControl(""),
-      dataFabricacao: new FormControl(""),
+      numSerie: new FormControl("",[Validators.required, Validators.minLength(3)]),
+      nome: new FormControl("",[Validators.required, Validators.minLength(3)]),
+      precoAquisicao: new FormControl("",[Validators.required, Validators.minLength(1)]),
+      dataFabricacao: new FormControl("",[Validators.required]),
     });
 
     this.equipamentos$ = this.equipamentoService.selecionarTodos();
@@ -39,6 +39,22 @@ export class EquipamentoComponent implements OnInit {
 
   get id(): AbstractControl | null {
     return this.form.get("id");
+  }
+
+  get numSerie(): AbstractControl | null {
+    return this.form.get("numSerie");
+  }
+
+  get nome(): AbstractControl | null {
+    return this.form.get("nome");
+  }
+
+  get precoAquisicao(): AbstractControl | null {
+    return this.form.get("precoAquisicao");
+  }
+
+  get dataFabricacao(): AbstractControl | null {
+    return this.form.get("dataFabricacao");
   }
 
   public async gravar(modal: TemplateRef<any>, equipamento?: Equipamento) {
