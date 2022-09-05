@@ -32,10 +32,6 @@ export class RequisicaoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.requisicoes$ = this.requisicaoService.selecionarTodos();
-    this.departamentos$ = this.departamentoService.selecionarTodos();
-    this.equipamentos$ = this.equipamentoService.selecionarTodos();
-
     this.form = this.fb.group({
       id: new FormControl(""),
       dataAbertura: new Date(),
@@ -44,7 +40,11 @@ export class RequisicaoComponent implements OnInit {
       descricao: new FormControl("", [Validators.required, Validators.minLength(3)]),
       equipamentoId: new FormControl("", [Validators.required]),
       equipamento: new FormControl("")
-    })
+    });
+
+    this.requisicoes$ = this.requisicaoService.selecionarTodos();
+    this.departamentos$ = this.departamentoService.selecionarTodos();
+    this.equipamentos$ = this.equipamentoService.selecionarTodos();
   }
 
   get tituloModal(): string {
